@@ -985,13 +985,13 @@
             try {
                 // Generate unique filename
                 const fileExt = selectedFile.name.split('.').pop();
-                const fileName = `${tag}_${Date.now()}.${fileExt}`;
+                const fileName = `${tag}_${name.replace(/\s+/g, '_')}_${Date.now()}.${fileExt}`.toLowerCase();
                 
                 // Create data URL for the image
                 const imageDataUrl = await fileToDataURL(selectedFile);
                 
-                // Construct GitHub image URL
-                const githubImageUrl = `https://${GITHUB_USERNAME}.github.io/${GITHUB_REPO}/images/jewellery/${fileName}`;
+                // Construct GitHub image URL (same folder as index.html)
+                const githubImageUrl = `https://${GITHUB_USERNAME}.github.io/${GITHUB_REPO}/${fileName}`;
                 
                 // Save to database
                 const newJewellery = {
@@ -1029,15 +1029,15 @@
                             </a>
                         </li>
                         <li>Go to your GitHub repository: <strong>${GITHUB_REPO}</strong></li>
-                        <li>Navigate to the <code>images/jewellery/</code> folder</li>
                         <li>Click "Add file" → "Upload files"</li>
-                        <li>Upload the downloaded image</li>
+                        <li>Upload the downloaded image to the <strong>same folder as index.html</strong></li>
                         <li>Commit the changes with a message like "Add ${filename}"</li>
                         <li>Wait 1-2 minutes for GitHub Pages to update</li>
                         <li>Refresh this page to see the image</li>
                     </ol>
                     <p><strong>Image will be available at:</strong><br>
-                    <code>${GITHUB_USERNAME}.github.io/${GITHUB_REPO}/images/jewellery/${filename}</code></p>
+                    <code>${GITHUB_USERNAME}.github.io/${GITHUB_REPO}/${filename}</code></p>
+                    <p><em>Note: All files (index.html and images) are in the same folder for simplicity.</em></p>
                 </div>
             `;
             
